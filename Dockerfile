@@ -2,14 +2,16 @@ FROM docker.n8n.io/n8nio/n8n:2.6.3
 
 USER root
 
-RUN apt-get update && apt-get install -y \
+RUN apk update && apk add --no-cache \
     python3 \
-    python3-pip \
-    build-essential \
+    py3-pip \
+    build-base \
     poppler-utils \
     tesseract-ocr \
-    libgl1 \
- && rm -rf /var/lib/apt/lists/*
+    libgl \
+    libstdc++ \
+    gcc \
+    musl-dev
 
 RUN pip3 install --no-cache-dir \
     pandas \
